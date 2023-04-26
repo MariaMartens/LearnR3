@@ -16,4 +16,5 @@ library(tidyverse)
 
 #This will be used for testing Git
 
-#Here's an example of a conflict
+#Here is another example
+
