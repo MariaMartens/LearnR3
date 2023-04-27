@@ -60,3 +60,7 @@ nhanes_small %>%
 ```
 
 
+Cute kitten in @fig-kitten-attack
+
+![Kitten and flower.](images/kitten.jpg){#fig-kitten-attack width="50%" height="50%"}
+
