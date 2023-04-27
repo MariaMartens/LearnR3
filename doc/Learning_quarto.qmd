@@ -2,13 +2,7 @@
 title: "Reproducible document"
 author: "Maria"
 format: html
-editor_options: 
-  chunk_output_type: inline
 ---
-
-```{r}
-2+2
-```
 
 ```{r setup}
 #| message: false
@@ -17,12 +11,10 @@ editor_options:
 library(tidyverse)
 library(NHANES)
 nhanes_small <- read_csv(here::here("data/nhanes_small.csv"))
-
 ```
 
 ```{r}
 nhanes_small
-
 ```
 
 ## Table of results
@@ -34,6 +26,6 @@ nhanes_small %>%
     mean_age = mean(age, na.rm = TRUE),
     mean_bmi = mean(bmi, na.rm = TRUE)
   ) %>%
-  ungroup()
+  ungroup() %>%
+  knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
 ```
-
