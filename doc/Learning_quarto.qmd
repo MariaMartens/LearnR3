@@ -191,3 +191,71 @@ nhanes_small %>%
   geom_violin(na.rm = TRUE)
 ```
 
+## Exercise to make plots with one or two variables
+
+```{r}
+library(NHANES)
+nhanes_exercise <- NHANES %>%
+  rename_with(snakecase::to_snake_case) %>%
+  rename(sex = gender)
+```
+
+```{r exercise}
+#| label: fig-exercise-diabetes
+#| fig-cap: "Distribution of age in diabetes"
+#| layout-ncol: 2
+#| fig-subcap: 
+#|   - "Distribution of age"
+#|   - "Distribution of age when onset of diabetes"
+
+
+# Distribution of age
+ggplot(nhanes_exercise, aes(x = age)) +
+    geom_histogram(na.rm = TRUE)
+
+# Distribution of age at diabetes diagnosis
+ggplot(nhanes_exercise, aes(x = diabetes_age)) +
+    geom_histogram(na.rm = TRUE)
+```
+
+```{r}
+#Exercise 9.5.3
+
+# Number of people who smoke now and are or above 20 years of age,
+# removing those with missing smoking status.
+nhanes_exercise %>% 
+  filter(age >= 20, !is.na(smoke_now)) %>% 
+  ggplot(aes(x = smoke_now)) +
+  geom_bar()
+```
+
+```{r}
+# Exercise 9.5.4
+
+# BMI in relation to mean arterial pressure
+nhanes_exercise %>% 
+  mutate(mean_arterial_pressure = (___ + (2 * ___)) / 3) %>% 
+  ggplot(aes(x = ___, y = ___)) +
+  ___(na.rm = TRUE) +
+  ___()
+```
+
+### Plotting three or more variables
+
+```{r}
+# Plotting systolic blood pressure in relation to educational status and diabetes
+
+nhanes_small %>% 
+    filter(!is.na(diabetes), !is.na(education)) %>% 
+    ggplot(aes(x = education, y = bp_sys_ave, colour = diabetes)) +
+    geom_boxplot(na.rm = TRUE)
+```
+
+```{r}
+# Plotting BMI in relation to systolic blood pressure and age
+
+nhanes_small %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave, color = age)) +
+    geom_point(na.rm = TRUE)
+```
+
